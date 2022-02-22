@@ -1,0 +1,26 @@
+body {
+	font-family: 'Helvetica';
+	background-color: #21325E;
+	width: 700px;
+	padding: 10px;
+	margin: 0;
+}
+button {
+	display:inline-block;
+	height: 125px;
+	width: 125px;
+	background-color: #FFE754;
+	border-radius: 20px;
+	border: 1px solid black;
+	padding: 50px;
+	margin: 20px;
+}
+h1{
+	text-align: center;
+	color: antiquewhite;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 59px; 
+}
+ 

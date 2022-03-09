@@ -1,3 +1,3 @@
 # TechnoBoard
 
-This project is aimed at creating a teacher dashboard which will simplify the work of the a teacher in conducting online classes and simplify and streamline the execution of online meetings and classes.
+This project is aimed at creating an instructor-dashboard which will simplify the work of the instructor in conducting online classes for their participating students, and streamline the process of scheduling meetings and tracking the students' attention.

@@ -6,11 +6,13 @@
   "version": "0.1.0",
 
   "browser_action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": "technoboard(16x16px).png"
   },
+
   "icons": {
-  "48": "icon48.png",
-  "128": "icon128.png" 
+  "16": "technoboard(16x16px).png",    
+  "48": "technoboard(48x48px).png"
   },
 
   "permissions": [

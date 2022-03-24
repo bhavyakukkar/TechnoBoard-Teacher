@@ -7,12 +7,12 @@
 
   "browser_action": {
     "default_popup": "popup.html",
-    "default_icon": "technoboard(16x16px).png"
+    "default_icon": "res/icons/technoboard(16x16px).png"
   },
 
   "icons": {
-  "16": "technoboard(16x16px).png",    
-  "48": "technoboard(48x48px).png"
+  "16": "res/icons/technoboard(16x16px).png",    
+  "48": "res/icons/technoboard(48x48px).png"
   },
 
   "permissions": [

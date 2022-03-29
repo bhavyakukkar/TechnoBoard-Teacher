@@ -17,11 +17,5 @@
 
   "permissions": [
     "activeTab"
-  ],
-  "content_scripts": [
-    {
-      "matches": ["https://christuniversity.webex.com/wbxmjs/joinservice/sites/christuniversity/meeting/download/*"],
-      "js": ["student/student-js/s-login.js"]
-    }
   ]
 }

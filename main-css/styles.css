@@ -6,14 +6,6 @@ body {
 	margin: 0;
 }
 button {
-	display:inline-block;
-	height: 125px;
-	width: 125px;
-	background-color: #FFE754;
-	border-radius: 20px;
-	border: 1px solid black;
-	padding: 50px;
-	margin: 20px;
 }
 h1{
 	text-align: center;
@@ -23,4 +15,17 @@ h1{
 	font-weight: normal;
 	font-size: 59px; 
 }
- 
+#mod{	
+	display:inline-block;
+	height: 125px;
+	width: 125px;
+	background-color: #FFE754;
+	border-radius: 20px;
+	border: 3px solid black;
+	margin: 20px;
+	
+	padding: 0px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: black;
+	
+}

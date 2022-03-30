@@ -14,14 +14,7 @@
   "16": "res/icons/technoboard(16x16px).png",    
   "48": "res/icons/technoboard(48x48px).png"
   },
-
   "permissions": [
     "activeTab"
-  ],
-  "content_scripts": [
-    {
-      "matches": ["https://christuniversity.webex.com/wbxmjs/joinservice/sites/christuniversity/meeting/download/*"],
-      "js": ["student/student-js/s-login.js"]
-    }
   ]
 }

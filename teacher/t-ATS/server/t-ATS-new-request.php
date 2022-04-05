@@ -1,37 +1,94 @@
 <!DOCTYPE html>
 <html>
 <?php
-		if(!empty($_GET['id']) and !empty($_GET['s']) and !empty($_GET['h'])) {
-            $teacher_id = $_GET['id'];
-			$session_id = $_GET['s'];
-			$received_hash = $_GET['h'];
+		$data_directory = "./database/";
+
+		function loginTeacher($teacher_id) {
+			global $data_directory;
+
+			$teacher_hash = hash('md5', "Technoboard".$teacher_id."194021119402241940261");
+			$teacher_directory_name = "t-".$teacher_hash;
+
+			$path = $data_directory.$teacher_directory_name;
+			if(!file_exists($path)) {
+				mkdir($path);
+			}
 			
-            $session_hash = updateMeta($session_id, $teacher_id);
-			newSession($session_hash);
+			return $teacher_directory_name."/";
 		}
 
-		function newSession($session_hash) {
+		function loginClass($teacher_key, $class_id, $session_id, $request_id) {
+			global $data_directory;
+
+			//$class_hash = hash('md5', "Technoboard".$teacher_key.$class_id."194021119402241940261");
+			$class_hash = $class_id;
+
+			$class_directory_name = "c-".$class_hash;
+
+			$path = $data_directory.$teacher_key.$class_directory_name;
+			if(!file_exists($path)) {
+				mkdir($path);
+			}
 			
-			$session_file_name = "session".$session_hash.".json";
-			$fp = fopen($session_file_name, 'w');
+			createClassPortal($teacher_key.$class_directory_name."/", $session_id, $request_id);
+			return $teacher_key.$class_directory_name."/";
+		}
+
+		function loginSession($class_key, $session_id) {
+			global $data_directory;
+
+			//$session_hash = hash('md5', "Technoboard".$class_key.$session_id."194021119402241940261");
+			$session_hash = $session_id;
+
+			$session_directory_name = "s-".$session_hash;
+			
+			$path = $data_directory.$class_key.$session_directory_name;
+			if(!file_exists($path)) {
+				mkdir($path);
+			}
+
+			return $class_key.$session_directory_name."/";
+		}
+
+		function createRequest($session_key, $request_id) {
+			global $data_directory;
+
+			$request_file_name = "r-".$request_id.".json";
+
+			$path = $data_directory.$session_key.$request_file_name;
+			$fp = fopen($path, 'w');
 			fwrite($fp, "[]");
 			fclose($fp);
 		}
 
-        function updateMeta($session_id, $teacher_id) {
+		function createClassPortal($class_key, $session_id, $request_id) {
+			global $data_directory;
 
-			$meta_file_name = "meta.json";
+			$path = $data_directory.$class_key."portal.json";
+			
+			$portal = array('sessionID' => strval($session_id), 'requestID' => strval($request_id));
 
-            $session_hash = hash('md5', $session_id."Technoboard194021119402241940261".$teacher_id);
-            $meta = array('SessionHash' => strval($session_hash), 'DateTime' => strval((int)(time())));
-
-            #Implement Calendar here
-			$fp = fopen($meta_file_name, 'w');
-			fwrite($fp, json_encode($meta));
+			$fp = fopen($path, 'w');
+			fwrite($fp, json_encode($portal));
 			fclose($fp);
+		}
 
-            return $session_hash;
-        }
-
+		if( !empty($_GET['id']) and !empty($_GET['c']) and !empty($_GET['s']) ) {
+            $teacher_id = $_GET['id'];
+			$class_id = $_GET['c'];
+			$session_id = $_GET['s'];
+			$request_id = (int)(time());
+			
+			$session = loginSession(
+						loginClass(
+							loginTeacher($teacher_id),
+							$class_id,
+							$session_id,
+							$request_id
+						),
+						$session_id
+					);
+			createRequest($session, $request_id);
+		}
 ?>
 </html>

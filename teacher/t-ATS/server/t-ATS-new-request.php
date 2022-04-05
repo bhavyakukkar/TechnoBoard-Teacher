@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php
-		$data_directory = "./database/";
+		$data_directory = "../../database/";
 
 		function loginTeacher($teacher_id) {
 			global $data_directory;

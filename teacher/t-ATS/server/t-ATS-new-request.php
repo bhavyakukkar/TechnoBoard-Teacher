@@ -80,14 +80,14 @@
 			$request_id = (int)(time());
 			
 			$session = loginSession(
-						loginClass(
-							loginTeacher($teacher_id),
-							$class_id,
-							$session_id,
-							$request_id
-						),
-						$session_id
-					);
+				loginClass(
+					loginTeacher($teacher_id),
+					$class_id,
+					$session_id,
+					$request_id
+				),
+				$session_id
+			);
 			createRequest($session, $request_id);
 		}
 ?>

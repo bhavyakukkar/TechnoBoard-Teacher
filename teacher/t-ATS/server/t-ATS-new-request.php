@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php
-		$data_directory = "./database/";
+		$data_directory = "../../database/";
 
 		function loginTeacher($teacher_id) {
 			global $data_directory;
@@ -30,8 +30,23 @@
 				mkdir($path);
 			}
 			
-			createClassPortal($teacher_key.$class_directory_name."/", $session_id, $request_id);
 			return $teacher_key.$class_directory_name."/";
+		}
+
+		function createPortal($class_key, $session_id, $request_id, $status) {
+			global $data_directory;
+
+			$path = $data_directory.$class_key."portal.json";
+			
+			$portal = array(
+				'sessionID' => strval($session_id),
+				'requestID' => strval($request_id),
+				'publish' => ($status ? 'true' : 'false')
+			);
+
+			$fp = fopen($path, 'w');
+			fwrite($fp, json_encode($portal));
+			fclose($fp);
 		}
 
 		function loginSession($class_key, $session_id) {
@@ -61,34 +76,25 @@
 			fclose($fp);
 		}
 
-		function createClassPortal($class_key, $session_id, $request_id) {
-			global $data_directory;
-
-			$path = $data_directory.$class_key."portal.json";
-			
-			$portal = array('sessionID' => strval($session_id), 'requestID' => strval($request_id));
-
-			$fp = fopen($path, 'w');
-			fwrite($fp, json_encode($portal));
-			fclose($fp);
-		}
-
 		if( !empty($_GET['id']) and !empty($_GET['c']) and !empty($_GET['s']) ) {
             $teacher_id = $_GET['id'];
 			$class_id = $_GET['c'];
 			$session_id = $_GET['s'];
 			$request_id = (int)(time());
 			
-			$session = loginSession(
-						loginClass(
-							loginTeacher($teacher_id),
-							$class_id,
-							$session_id,
-							$request_id
-						),
-						$session_id
-					);
+			$class = loginClass(
+				loginTeacher($teacher_id),
+				$class_id,
+				$session_id,
+				$request_id
+			);
+			$session = loginSession($class, $session_id);
+
 			createRequest($session, $request_id);
+
+			createPortal($class, $session_id, $request_id, True);
+			usleep(5000000);
+			createPortal($class, $session_id, $request_id, False);
 		}
 ?>
 </html>

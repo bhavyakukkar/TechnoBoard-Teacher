@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <?php
+		header('Access-Control-Allow-Origin: *');
+		
 		$data_directory = "../../database/";
 
 		function loginTeacher($teacher_id) {

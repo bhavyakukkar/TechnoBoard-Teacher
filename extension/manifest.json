@@ -1,20 +1,27 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
-  "name": "TechnoBoard",
+  "name": "TechnoBoard-Teacher",
   "description": "This extension helps in conducting online meetings and classes",
   "version": "0.1.0",
 
-  "browser_action": {
-    "default_popup": "popup.html",
+  "action": {
+    "default_popup": "new-request.html",
     "default_icon": "res/icons/technoboard(16x16px).png"
   },
 
   "icons": {
-  "16": "res/icons/technoboard(16x16px).png",    
-  "48": "res/icons/technoboard(48x48px).png"
+    "16": "res/icons/technoboard(16x16px).png",
+    "48": "res/icons/technoboard(48x48px).png"
   },
-  "permissions": [
-    "activeTab"
+  "host_permissions": [
+    "https://technoboard-extension.000webhostapp.com/"
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": ["https://christuniversity.webex.com/*",
+      "https://meet.google.com/*"],
+      "resources": ["result.html", "script.js"]
+    }
   ]
 }

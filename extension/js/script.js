@@ -22,7 +22,7 @@ function newRequest() {
 }
 
 function injectResult() {
-    fetch(chrome.runtime.getURL('/result.html')).then(r => r.text()).then(html => {
+    fetch(chrome.runtime.getURL('../html/result.html')).then(r => r.text()).then(html => {
         document.body.insertAdjacentHTML('beforeend', html);
     });
     setTimeout(function() {

@@ -9,58 +9,100 @@
 <body>
     <div id="TechnoBoard-Teacher-ATS-Result">
         <style scoped>
-            body {
-                font-family: 'Helvetica';
+            body{
+                font-family:'Helvetica';
                 background-color: #21325E;
-                width: 400px;
-                padding: 1px;
+                width: 350px;
+                padding: 10px;
                 margin: 0;
             }
-            h2{
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 30px;
+            .button{
+                display:inline-block;
+                color:#020241;
+                text-align:center;
+                background-color:#FFE754;
+                border-radius:15px;
+                padding:15px 25px;
+                margin:20px;
+                font-size:15px;
+                cursor:pointer;
+                box-shadow:0 9px #534a0f;
+                font-weight:bold;
             }
-            table{
-                padding: 2px;
-                border: 5px solid white;
-                border-color: aliceblue;
-                
+            .button:hover{
+                background-color:#9e8b0c;
+            }
+            .button:active{
+                background-color:#9e8b0c;
+                box-shadow:0 5px #534a0f;
+                transform:translateY(4px);
+            }
+            h1{
+                text-align:center;
+                color:#FFE754;
+                font-family:Roboto;
+                font-style:normal;
+                font-weight:700px;
+                font-size:30px; 
+            }
+            h3{
+                text-align:center;
+                color:#ddd289;
+                font-family:Roboto;
+                font-style:normal;
+                font-weight:500px;
+                font-size:20px; 
             }
             .main{
-                background: black;
-                position: absolute;
+                background:#020241;
+                position:absolute;
                 z-index:10000000;
                 top:0;
                 right:15px;
+                width:400px;
+                height:300px;
                 border:3px solid #FFE754;
             }
+            .text01{
+                text-align:center;
+                color:#d6d1ad;
+                font-family:Roboto;
+                font-style:normal;
+                font-weight:bolder;
+                font-size:19px;
+            }
+            .text02{
+                text-align:center;
+                color:#d6d1ad;
+                font-family:Roboto;
+                font-style:unset;
+                font-weight:normal;
+                font-size:16px;
+            }
         </style>
-
-
-
         <div class="main">
             <div class="header">
-                <h1> TechnoBoard</h1>
-                <h2> Attention Tracking System</h2><br>
-                <button>Refresh</button>
-                <table>
-                    <tr>
-                        <th>Summary</th>
-                        <th>Percentage</th>
-                    </tr>
-                    <tr>
-                        <td>Average Attention</td>
-                        <td id="overall-attention">Dummy%</td> <!--This is will be used to update the text using js -->
-                    </tr>
-                    <tr>
-                        <td>Number of Participants</td>
-                        <td id="total-participants">9999</td><!--This will contain the total number of partipants in the meet  -->
-                    </tr>
-                </table>
+                <center>
+                    <h1> TechnoBoard</h1>
+                    <h3> Attention Tracking System</h3>
+                    <table>
+                        <tr>
+                            <th class="text01">SUMMARY</th>
+                            <th class="text01">PERCENTAGE</th>
+                        </tr>
+                        <tr>
+                            <td class="text02">Average Attention &nbsp&nbsp&nbsp&nbsp&nbsp: </td>
+                            <td class="text02" id="overall-attention">Dummy%</td> <!--This is will be used to update the text using js -->
+                        </tr>
+                        <tr>
+                            <td class="text02">Number of Participants : </td>
+                            <td class="text02" id="total-participants">9999</td><!--This will contain the total number of partipants in the meet  -->
+                        </tr>
+                    </table>
+                    <button class="button">REFRESH</button>
+                </center>
             </div>
-            
         </div>
     </div>
-    
 </body>
 </html>

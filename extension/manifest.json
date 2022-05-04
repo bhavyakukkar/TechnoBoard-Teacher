@@ -30,5 +30,8 @@
       "https://meet.google.com/*"],
       "resources": ["html/result.html", "js/script.js", "res/gifs/loading.gif"]
     }
+  ],
+  "permissions":[
+    "downloads"
   ]
 }

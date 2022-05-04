@@ -9,7 +9,11 @@ function addListenerToButton() {
     var button = document.getElementById("new-request");
     button.addEventListener('click', function() {
         newRequest();
-        /*injectResult();*/
+        loadingWindow();
+        setTimeout(function() {
+            closePopup();
+        }, 10000);
+        injectResult();
     })
 }
 
@@ -21,13 +25,23 @@ function newRequest() {
     xmlhttp.send();
 }
 
+//Hide New-Request popup content
+function loadingWindow() {
+    document.body.style.padding = "0px";
+    document.body.style.width = "24px";
+    document.body.style.height = "24px";
+    document.body.innerHTML = "<img src='../res/gifs/loading.gif' alt='busy' style='width:24px; height:24px;'>";
+}
+
+//Closes New-Request popup after request is made
+function closePopup() {
+    window.close();
+}
+
 function injectResult() {
-    fetch(chrome.runtime.getURL('/result.html')).then(r => r.text()).then(html => {
+    fetch(chrome.runtime.getURL('../html/result.html')).then(r => r.text()).then(html => {
         document.body.insertAdjacentHTML('beforeend', html);
     });
-    setTimeout(function() {
-        document.getElementById("index_link").addEventListener("click", sign);
-    }, 500);
 }
 
 function result() {

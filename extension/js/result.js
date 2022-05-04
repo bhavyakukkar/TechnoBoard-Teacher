@@ -1,4 +1,5 @@
 var seekRequest = true;
+var seekResult = true;
 var resultInjected = false;
 
 
@@ -31,7 +32,6 @@ function check() {
                     suspendCheck();
                     injectResult();
                     updateResult();
-                    
                     /*injectSign();
                     setTimeout(function() {
                         ejectSign(false);
@@ -82,43 +82,66 @@ function injectResult() {
 function updateResult() {
     setInterval(function() {
         result();
-    }, 500);
+    }, 1000);
 }
 
 
 function result() {
     
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var parser = new DOMParser();
-            var responseDoc = parser.parseFromString(this.responseText, "text/html");
-
-            updateResultTable(responseDoc.getElementById("request"));
-        }
-    };
-    xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/teacher/t-ATS-retrieve-request.php?t=john1024&c=csc101", true);
-    xmlhttp.send();
+    if(seekResult) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var parser = new DOMParser();
+                var responseDoc = parser.parseFromString(this.responseText, "text/html");
+                
+                updateResultTable(responseDoc.getElementById("result"));
+            }
+        };
+        xmlhttp.open("GET", "https://technoboard-extension.000webhostapp.com/ATS/php/teacher/t-ATS-retrieve-request.php?t=john1024&c=csc101", true);
+        xmlhttp.send();
+    }
 }
 
 
-function updateResultTable(table) {
-    var result = document.getElementById("result");
+function suspendResult() {
+    seekResult = false;
+}
 
 
+function updateResultTable(result) {
 
-    for (var i = 0, row; row = table.rows[i]; i++) {
+    var tableOut = document.getElementById('result');
+    var tableOutBody = document.createElement('tbody');
+    
+    var resultArray = [];
+
+    for (var i = 0, row; row = result.rows[i]; i++) {
         for (var j = 0, col; col = row.cells[j]; j++) {
-            result.insertRow("<td>"+(col.innerText)+"</td>");
-            alert(col.innerText);
+            resultArray.push(col.innerText);
         }
     }
+
+    resultArray.forEach(function(data) {
+        var row = document.createElement('tr');
+        var cell = document.createElement('td');
+        
+        cell.appendChild(document.createTextNode(data));
+        row.appendChild(cell);
+        tableOutBody.appendChild(row);
+    });
+
+    while (tableOut.firstChild) {
+        tableOut.removeChild(tableOut.firstChild);
+    }
+    tableOut.appendChild(tableOutBody);
 }
 
 
 //Eject result
 function closeResult() {
-    document.body.removeChild(document.getElementById("Technoboard-Teacher-ATS-Result"));
+    suspendResult();
+    document.getElementById("TechnoBoard-Teacher-ATS-Result").remove();
 }
 
 

@@ -10,10 +10,10 @@ function addListenerToButton() {
     button.addEventListener('click', function() {
         newRequest();
         loadingWindow();
-        setTimeout(function() {
+        /*setTimeout(function() {
             closePopup();
-        }, 10000);
-        injectResult();
+        }, 10000);*/
+        //injectResult();
     })
 }
 

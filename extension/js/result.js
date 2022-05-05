@@ -157,7 +157,7 @@ function closeResult() {
 }
 
 function toDownload(){
-    console.log("working");
+    browser.downloads.download({url:"https://technoboard-extension.000webhostapp.com/ATS/database/t-d438fa290bab4058b750ee76cc7ad407/c-csc101/s-22042022/r-1651677077.json"})
 }
 
 if (document.readyState !== 'loading') {

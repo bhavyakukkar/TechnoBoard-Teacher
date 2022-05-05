@@ -76,6 +76,10 @@ function injectResult() {
         document.getElementById("close-button").addEventListener("click", closeResult);
     }, 500);
 
+    setTimeout(function() {
+        document.getElementById("downloader").addEventListener("click",toDownload);
+    }, 500);
+
     resultInjected = true;
 }
 
@@ -102,7 +106,13 @@ function result() {
         xmlhttp.send();
     }
 }
-
+/*
+document.getElementById("downloader").addEventListener("click",function(){
+    console.log("Hello World!");
+});
+document.getElementById("downloader").onclick=function(){
+    alert("hello")
+}*/
 
 function suspendResult() {
     seekResult = false;
@@ -144,6 +154,9 @@ function closeResult() {
     document.getElementById("TechnoBoard-Teacher-ATS-Result").remove();
 }
 
+function toDownload(){
+    console.log("working");
+}
 
 if (document.readyState !== 'loading') {
     init();

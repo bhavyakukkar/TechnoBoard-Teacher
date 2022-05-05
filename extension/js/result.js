@@ -82,7 +82,7 @@ function injectResult() {
 function updateResult() {
     setInterval(function() {
         result();
-    }, 1000);
+    }, 700);
 }
 
 
@@ -131,10 +131,12 @@ function updateResultTable(result) {
         tableOutBody.appendChild(row);
     });
 
-    while (tableOut.firstChild) {
-        tableOut.removeChild(tableOut.firstChild);
+    if(tableOut) {
+        while (tableOut.firstChild) {
+            tableOut.removeChild(tableOut.firstChild);
+        }
+        tableOut.appendChild(tableOutBody);
     }
-    tableOut.appendChild(tableOutBody);
 }
 
 

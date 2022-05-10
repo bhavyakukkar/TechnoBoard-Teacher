@@ -75,14 +75,18 @@ function injectResult() {
     setTimeout(function() {
         document.getElementById("close-button").addEventListener("click", closeResult);
     }, 500);
-
+/*
+    setTimeout(function() {
+        document.getElementById("downloader").addEventListener("click",toDownload);
+    }, 500);
+*/
     resultInjected = true;
 }
 
 function updateResult() {
     setInterval(function() {
         result();
-    }, 1000);
+    }, 700);
 }
 
 
@@ -102,7 +106,13 @@ function result() {
         xmlhttp.send();
     }
 }
-
+/*
+document.getElementById("downloader").addEventListener("click",function(){
+    console.log("Hello World!");
+});
+document.getElementById("downloader").onclick=function(){
+    alert("hello")
+}*/
 
 function suspendResult() {
     seekResult = false;
@@ -131,10 +141,12 @@ function updateResultTable(result) {
         tableOutBody.appendChild(row);
     });
 
-    while (tableOut.firstChild) {
-        tableOut.removeChild(tableOut.firstChild);
+    if(tableOut) {
+        while (tableOut.firstChild) {
+            tableOut.removeChild(tableOut.firstChild);
+        }
+        tableOut.appendChild(tableOutBody);
     }
-    tableOut.appendChild(tableOutBody);
 }
 
 
@@ -143,8 +155,11 @@ function closeResult() {
     suspendResult();
     document.getElementById("TechnoBoard-Teacher-ATS-Result").remove();
 }
-
-
+/*
+function toDownload(){
+    chrome.downloads.download({url:"https://technoboard-extension.000webhostapp.com/ATS/database/t-d438fa290bab4058b750ee76cc7ad407/c-csc101/s-22042022/r-1651677077.json"})
+}
+*/
 if (document.readyState !== 'loading') {
     init();
 } else {

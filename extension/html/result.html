@@ -20,6 +20,7 @@
                 display:inline-block;
                 color:#020241;
                 text-align:center;
+                font-family:'Monospace Regular';
                 background-color:#FFE754;
                 border-radius:15px;
                 padding:15px 25px;
@@ -81,6 +82,9 @@
             }
             #result {
                 color: white;
+                border: 1px solid #21325E;
+                padding: 5px;
+                background-color: #121251;
             }
         </style>
         <div class="main">
@@ -88,6 +92,7 @@
                 <center>
                     <h1> TechnoBoard</h1>
                     <h3> Attention Tracking System</h3>
+                    <p class="text01"> Here is the list of students who have responded:</p>
                     
                     <table id="result"></table>
 
@@ -105,7 +110,7 @@
                             <td class="text02" id="total-participants">9999</td><!--This will contain the total number of partipants in the meet  -->
                         </tr>
                     </table>
-                    <button class="button" id="close-button">Close</button><a href="" download="Report.xlsx"><button class="button">Download</button></a>
+                    <a href="https://technoboard-extension.000webhostapp.com/ATS/php/teacher/t-ATS-retrieve-request.php?t=john1024&c=csc101"><button class="button">Download</button></a><button class="button" id="close-button">Close</button>
                 </center>
             </div>
         </div>

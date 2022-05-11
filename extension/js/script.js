@@ -3,6 +3,8 @@
 function init() {
     checkLogin();
     addListenerToButton();
+
+    //chrome.storage.sync.clear();
 }
 
 //Add Listener to new-request Button
@@ -110,7 +112,8 @@ function injectLogin() {
     setTimeout(function() {
 
             var button = getFromInjectedScope("login")
-            button.addEventListener("click",function(){
+            button.addEventListener("click", function(){
+                addLogin();
                 alert("jleadsl");
             });            
     }, 1000);
@@ -121,8 +124,8 @@ function injectLogin() {
 
 function checkLogin() {
     var username;
-    chrome.storage.sync.get('Technoboard-Student-ATS-username', function(data) {
-        username = data['Technoboard-Student-ATS-username'];
+    chrome.storage.sync.get('Technoboard-Teacher-ATS-username', function(data) {
+        username = data['Technoboard-Teacher-ATS-username'];
         if(!username)
             injectLogin();
     });
@@ -131,9 +134,14 @@ function checkLogin() {
 function addLogin() {
     
     var userdata = getFromInjectedScope("username").value;
-    chrome.storage.sync.set({'Technoboard-Student-ATS-username':userdata}, function() {
+
+    var key = "Technoboard-Teacher-ATS-username",
+        value = userdata;
+    
+    var usernameJson = {};
+    usernameJson[key] = value;
+    chrome.storage.sync.set(usernameJson, function() {
         //login added
-        alert(userdata);
     });
 }
 

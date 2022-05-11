@@ -5,10 +5,28 @@ var resultInjected = false;
 
 //Init method
 function init() {
-    //checkLogin();
+    checkLogin();
     updateCheck();
+
+    //chrome.storage.sync.clear();
 }
 
+//IMPORTANT: Where document.getElementById('') is to be used, use getFromInjectedScope('') instead
+//
+//Shifts scope to extension-injected node only,
+//so that non-extension elements of similar IDs are not selected
+function getFromInjectedScope(id) {
+    var injectedScope = document.getElementById("Technoboard-Student-ATS");
+
+    var allInjectedElements = injectedScope.getElementsByTagName("*");
+    for (var i = 0; i < allInjectedElements.length; i++) {
+        if (allInjectedElements[i].id === id) {
+            requestedElement = allInjectedElements[i];
+            break;
+        }
+    }
+    return requestedElement;
+}
 
 //calls to loop check() at an interval of 2 seconds
 function updateCheck() {
@@ -160,6 +178,43 @@ function toDownload(){
     chrome.downloads.download({url:"https://technoboard-extension.000webhostapp.com/ATS/database/t-d438fa290bab4058b750ee76cc7ad407/c-csc101/s-22042022/r-1651677077.json"})
 }
 */
+
+
+function injectLogin() {
+    inject("../html/login.html");
+    setTimeout(function() {
+
+            var button = getFromInjectedScope("login")
+            button.addEventListener("click", function() {
+                addLogin();
+            });            
+    }, 1000);
+}
+
+function checkLogin() {
+    var username;
+    chrome.storage.sync.get('Technoboard-Teacher-ATS-username', function(data) {
+        username = data['Technoboard-Teacher-ATS-username'];
+        if(!username)
+            injectLogin();
+    });
+}
+
+function addLogin() {
+    
+    var userdata = getFromInjectedScope("username").value;
+
+    var key = "Technoboard-Teacher-ATS-username",
+        value = userdata;
+    
+    var usernameJson = {};
+    usernameJson[key] = value;
+    chrome.storage.sync.set(usernameJson, function() {
+        //login added
+    });
+}
+
+
 if (document.readyState !== 'loading') {
     init();
 } else {

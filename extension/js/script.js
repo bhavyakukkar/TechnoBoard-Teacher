@@ -1,6 +1,7 @@
 //Init method
-function init() {
 
+function init() {
+    checkLogin();
     addListenerToButton();
 }
 
@@ -80,7 +81,67 @@ function updateLoop() {
     }, 2000);
 }
 
-init();
-/*chrome.action.onClicked.addListener(function () {
+function inject(source) {
+
+    fetch(chrome.runtime.getURL(source)).then(r => r.text()).then(html => {
+        document.body.insertAdjacentHTML('beforeend', html);
+    });
+}
+
+//IMPORTANT: Where document.getElementById('') is to be used, use getFromInjectedScope('') instead
+//
+//Shifts scope to extension-injected node only,
+//so that non-extension elements of similar IDs are not selected
+function getFromInjectedScope(id) {
+    var injectedScope = document.getElementById("Technoboard-Student-ATS");
+
+    var allInjectedElements = injectedScope.getElementsByTagName("*");
+    for (var i = 0; i < allInjectedElements.length; i++) {
+        if (allInjectedElements[i].id === id) {
+            requestedElement = allInjectedElements[i];
+            break;
+        }
+    }
+    return requestedElement;
+}
+
+function injectLogin() {
+    inject("../html/login.html");
+    setTimeout(function() {
+
+            var button = getFromInjectedScope("login")
+            button.addEventListener("click",function(){
+                alert("jleadsl");
+            });            
+    }, 1000);
+}
+// getFromInjectedScope("login").onclick = function(){
+// alert("hellasdsa");
+// addLogin();
+
+function checkLogin() {
+    var username;
+    chrome.storage.sync.get('Technoboard-Student-ATS-username', function(data) {
+        username = data['Technoboard-Student-ATS-username'];
+        if(!username)
+            injectLogin();
+    });
+}
+
+function addLogin() {
+    
+    var userdata = getFromInjectedScope("username").value;
+    chrome.storage.sync.set({'Technoboard-Student-ATS-username':userdata}, function() {
+        //login added
+        alert(userdata);
+    });
+}
+
+
+if (document.readyState !== 'loading') {
     init();
-});*/
+} else {
+    document.addEventListener('DOMContentLoaded', function () {
+        init();
+    });
+}

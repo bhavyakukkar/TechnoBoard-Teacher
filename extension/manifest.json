@@ -32,6 +32,7 @@
     }
   ],
   "permissions":[
-    "downloads"
+    "downloads",
+    "storage"
   ]
 }

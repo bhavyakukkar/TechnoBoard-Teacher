@@ -2,14 +2,7 @@
 
 This project is aimed at creating an instructor-dashboard which will simplify the work of the instructor in conducting online classes for their participating students, and streamline the process of scheduling meetings and tracking the students' attention.
 
-Steps to install Web Encrypter in Chrome:
-
-1. Download this repo as a ZIP file from GitHub.
-2. Unzip the file and you should have a folder named WhatsApp-Encrypter-
-3. In Chrome go to the extensions page (chrome://extensions).
-4. Enable Developer Mode.
-5. Drag the WhatsApp-Encrypter- folder anywhere on the page to import it (do not delete the folder afterwards).
-The Extension is ready for use.
+[Student-side Module](https://github.com/bhavyakukkar/TechnoBoard-Student)
 
 # How to use the Extension in online classes
 Before using the extension it is essential that both the host and the participants have the extension installed their machinces
